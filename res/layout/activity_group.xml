@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 M.Nakamura
+ *
+ * This software is licensed under a Creative Commons
+ * Attribution-NonCommercial-ShareAlike 2.1 Japan License.
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 		http://creativecommons.org/licenses/by-nc-sa/2.1/jp/legalcode
+ -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+    
+    <TextView
+        android:id="@+id/group_textView_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/group_textView_werewolves"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <ListView
+        android:id="@+id/group_listView_players"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/group_textView_title"
+        android:choiceMode="singleChoice" />
+
+    <Button
+        android:id="@+id/button_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/group_listView_players"
+        android:onClick="onClickOkButton"
+        android:text="@string/common_text_ok" />
+
+</RelativeLayout>

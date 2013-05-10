@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ Copyright (C) 2013 M.Nakamura
+ *
+ * This software is licensed under a Creative Commons
+ * Attribution-NonCommercial-ShareAlike 2.1 Japan License.
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 		http://creativecommons.org/licenses/by-nc-sa/2.1/jp/legalcode
+-->
+<resources>
+
+    <string name="app_name">タブラの狼＋</string>
+    <string name="common_text_ok">ＯＫ</string>
+    <string name="common_text_cancel">キャンセル</string>
+    <string name="common_text_warning">警告</string>
+    <string name="common_text_error">エラー</string>
+    <string name="common_text_check">確認</string>
+    <string name="common_text_send">送信</string>
+    <string name="common_text_bug_report">予期しないエラーが発生しました。開発元にエラーを送信してください。</string>
+    <string name="main_button_start">スタート</string>
+    <string name="main_button_player">プレイヤー設定</string>
+    <string name="main_button_role">役職調整</string>
+    <string name="main_button_help">ヘルプ</string>
+    <string name="player_button_add">追加</string>
+    <string name="player_button_del">削除</string>
+    <string name="add_player_dialog_title">プレイヤー追加</string>
+    <string name="add_player_textView_name">お名前</string>
+    <string name="add_player_radio_male">男性</string>
+    <string name="add_player_radio_female">女性</string>
+    <string name="role_textView_number">プレイヤー%d人</string>
+    <string name="role_button_max">最大人数%d人</string>
+    <string name="role_radio_none">ランダムにしない</string>
+    <string name="role_radio_without_werewolf">人狼以外をランダムにする</string>
+    <string name="role_radio_include_werewolf">全てをランダムにする</string>
+    <string name="role_text_warning_min">プレイヤーを%d人以上指定してください</string>
+    <string name="role_text_warning_max">最大人数を超えています。最大人数を変更してください</string>
+    <string name="role_text_warning_role">設定人数がプレイ人数を超えています</string>
+    <string name="help_textView_title">タブラの狼＋(プラス)</string>
+    <string name="help_textView_version">Version %s</string>
+    <string name="help_textView_message">このゲームは「汝は人狼なりや？」または「人狼ゲーム」と呼ばれるパーティーゲームである。５人以上（推奨８人以上。４人でもワンナイト人狼のルールならプレイ可能）でプレイ可能（初期設定は最大２４人。変更可能）。\n
+日本においてもっとも普及しているイタリアのdaVinci社が販売している「Lupus in Tabula（タブラの狼）」がベースになっている。\n
+「Lupus in Tabula」にある基本の３種類と８種類の特殊な役職に加え、「ミラーズホロウの人狼」や「究極の人狼」等を参考にした１８種類の独自の役職がある。\n
+このゲームは役職の人数を自由に変えることができる。また、設定された人数の範囲内でランダムな人数を出現させることもできる（人狼や預言者が何人いるか判らない状態でプレーする事ができる）。\n
+TextToSpeech（N2 TTSが無料で利用可能）が入っているとメッセージを喋る。\n\n
+基本的な遊び方\n
+プレイヤーはそれぞれが村人と村人に化けた人狼となり、自分自身の正体がばれないように他のプレイヤーと交渉して正体を探る。\n
+ゲームは半日単位で進行し、昼には全プレイヤーの投票により決まった人狼容疑者の処刑が、夜には人狼による村人の捕食が行われる。\n
+昼と夜を繰り返し、ゲーム終了条件がどれか一つ満たされた時点で、ゲーム終了となる。\n
+４人での遊び方(ワンナイト人狼)はダミープレイヤー２人、人狼１人、盗賊１人を追加する。その他は適当。最初の夜にダミープレイヤーを確認し、人狼がいればやり直す。\n
+二日目の昼にダミープレイヤーを処刑し、その夜の間に人狼はもう一人のダミープレイヤーを殺す。預言者はダミープレイヤーを占う。ゲームは三日目の昼から開始する。\n\n
+ゲーム終了条件\n
+【村人側の勝利】人狼がすべて死亡した\n
+【人狼側の勝利】村人の数が、人狼の数と等しくなった\n
+【ハムスター変化の勝利】村人か人狼、どちらかが勝利条件を満たした時、自分が生存していればそのチームの代わりに勝者となる。\n
+【悪魔の勝利】人狼の捕食対象に選ばれた後、昼の投票で処刑されることで勝者となる。\n
+【道化師の勝利】処刑された時点で勝者となる。\n
+【恋人達の勝利】村人と人狼が恋人になった時、２人が最後まで生きていれば勝者となる。\n
+【カルト教団の勝利】生き残っているのが、カルトリーダーとカルト信者だけなら勝者となる。\n
+\n「タブラの狼＋」の役職(Lupus in Tabulaの役職)\n
+人狼(Werewolf) 夜の間に人狼以外のプレイヤーを1人指定し、殺すことができる。人狼は他の人狼を全て把握できる。\n
+村人(Villager) 何も能力を持たない一般の村人である。\n
+預言者(Seer) 夜の間にプレイヤーの中から1人を指定し、そのプレイヤーが村人か人狼かを知ることができる。また、ハムスター変化のプレイヤーを殺すことができる。\n
+霊媒師（Medium） 夜の間に、その日の処刑者が村人なのか人狼なのかを知ることができる。\n
+異教徒（Possessed） 村人ですが人狼の陣営に参加している。終了条件の判断時にも村人として扱われるが、人狼が勝利することで勝利となる。\n
+護衛（Bodyguard） 夜の間にプレイヤーの中から1人を指定し、そのプレイヤーを人狼の捕食から守ることができる。守った対象と、人狼の捕食対象が一致した場合、そのプレイヤーは殺されずに済む。\n
+疫病神（Owl-man） 夜の間に、プレイヤーを1人指定する。次の日の昼の投票後、投票数が多かった上位の中に指定されたプレイヤーがいなかった場合、指定されたプレイヤーを容疑者に追加する。\n
+フリーメーソン（Freemasons） 2人一組の役職であり、お互いがお互いを認識できる。つまり自分以外に1人、人狼でないプレイヤーを知ることができるのである。\n
+ハムスター変化(Werehamster) 仲間を持たない単独の勢力。人狼に捕食されることはないが、預言者に指定されると死んでしまう。霊媒師には村人と判断され、終了条件の判断時にも村人として扱われる。\n
+背信者（Mythomaniac） 2度目の夜に一度だけ生き残っているプレイヤーを1人指定する。そのプレイヤーが人狼か預言者なら、指定したプレイヤーの能力を得る。それ以外の場合は村人になる。\n
+悪魔(Devil) 仲間を持たない単独の勢力。人狼に捕食されることはない。預言者には村人と判断されるが、霊媒師には人狼と判断される。\n
+狩人（追加） 人狼に捕食されたとき、復讐としてプレイヤーを1人殺害できる。殺す対象を指定するのは狩人で必ずしも人狼を殺せる訳ではない。\n
+薬剤師（追加） 一般の村人だが、人狼に捕食されたとき、次の日の夜の人狼の襲撃がなくなる。\n
+仲人（追加） 2度目の夜に任意の2人のプレイヤーを指定する。指定された2人は「恋人」となる。恋人達は片方が死んだ場合残りの片方も死ぬ。\n
+魔女（追加） 治癒薬と毒薬を一つずつ持っており、夜の間にそれを使用することが可能。治癒薬は殺害されてすぐのプレイヤーを蘇生できる。毒薬は使った相手を殺害できる。\n
+預言者見習い（追加） 最初は一般の村人だが、預言者が死んだ時預言者になる。\n
+祈祷師（追加） 夜の間に、プレイヤーを1人指定する。疫病神によって指定されたプレイヤーと一致した場合、次の日の昼の投票の容疑者に追加されない。\n
+聖職者（追加） 昼の投票で処刑者になった場合一回だけ処刑を回避できる。\n
+村長（追加） 一般の村人だが、昼の投票が2票分となる。\n
+墓守（追加） 最初は一般の村人だが、人狼の捕食対象になった場合、人狼になる。\n
+老婆（追加） 寿命があり、それは生き残っている人狼×2日。それを過ぎると例え襲撃されていなくても死亡する。\n
+魔術師（追加） 夜の間にプレイヤーの中から1人を指定し、そのプレイヤーが仲間を持たない単独の勢力なのかを知ることができる。\n
+妖術師（追加） 夜の間にプレイヤーの中から1人を指定し、そのプレイヤーが預言者なのかを知ることができる。人狼が勝利することで勝利となる。\n
+盗賊（追加） 2度目の夜、プレイヤーを1人指定する。そのプレイヤーと役職が入れ替わる。指定されたプレイヤーは村人になる。\n
+タフガイ（追加） 一般の村人だが、人狼に捕食されたとき、一度だけ死なない。\n
+カルトリーダー（追加） 夜の間に、プレイヤーを1人指定する。指定されたプレイヤーはカルト信者になる。\n
+カルト信者（追加） カルトリーダーによってカルト信者となったプレイヤー。特殊能力を持っていた場合、その能力は失う。\n
+妖狐（追加） 2度目の夜に生き残っているプレイヤーの役職に変わる。どのプレイヤーになるかは判らない。\n
+道化師（追加） 仲間を持たない単独の勢力。処刑された時点で勝者となる。\n
+\nCopyright &#169; 2013 M.Nakamura</string>
+    <string name="opening_textView_message">人里はなれたタブラの村に、人狼が現れた。\n
+夜ごと村人の何人かが狼に変身し、罪の無い犠牲者を虐殺して破壊衝動を満たしている。\n
+朝になると、生き残った村人は集まり、この問題について話し合う。\n
+その後、村のなかで人狼と思われる１人を、処刑するのだ。\n
+この虐殺の果てに生き残るのは、誰なのだろう？</string>
+    <string name="opening_speech_message">ひとざとはなれた、たぶらのむらに、じんろうがあらわれた。
+よごと、むらびとのなんにんかが、おおかみにへんしんし、つみのないぎせいしゃを、ぎゃくさつして、はかいしょうどうをみたしている。
+あさになると、いきのこったむらびとはあつまり、このもんだいについてはなしあう。
+そのご、むらのなかで、じんろうとおもわれるひとりを、しょけいするのだ。
+このぎゃくさつのはてに、いきのこるのは、だれなのだろう？</string>
+
+    <string-array name="role_names">
+        <item>人狼</item>
+        <item>村人</item>
+        <item>預言者</item>
+        <item>霊媒師</item>
+        <item>異教徒</item>
+        <item>護衛</item>
+        <item>疫病神</item>
+        <item>ﾌﾘｰﾒｰｿﾝ</item>
+        <item>ﾊﾑｽﾀｰ変化</item>
+        <item>背信者</item>
+        <item>悪魔</item>
+        <item>狩人</item>
+        <item>薬剤師</item>
+        <item>仲人</item>
+        <item>魔女</item>
+        <item>預言者見習い</item>
+        <item>祈祷師</item>
+        <item>聖職者</item>
+        <item>村長</item>
+        <item>墓守</item>
+        <item>老婆</item>
+        <item>魔術師</item>
+        <item>妖術師</item>
+        <item>盗賊</item>
+        <item>タフガイ</item>
+        <item>ｶﾙﾄﾘｰﾀﾞｰ</item>
+        <item>ｶﾙﾄ信者</item>
+        <item>妖狐</item>
+        <item>道化師</item>
+    </string-array>
+    <string-array name="role_descriptions">
+        <item>夜の間に人狼以外のプレイヤーを1人指定し、殺すことができる。人狼は他の人狼を全て把握できる。</item>
+        <item>何も能力を持たない一般の村人である</item>
+        <item>夜の間にプレイヤーの中から1人を指定し、そのプレイヤーが村人か人狼かを知ることができる。また、ハムスター変化のプレイヤーを殺すことができる。</item>
+        <item>夜の間に、その日の処刑者が村人なのか人狼なのかを知ることができる。</item>
+        <item>村人ですが人狼の陣営に参加している。終了条件の判断時にも村人として扱われるが、人狼が勝利することで勝利となる</item>
+        <item>夜の間にプレイヤーの中から1人を指定し、そのプレイヤーを人狼の捕食から守ることができる。守った対象と、人狼の捕食対象が一致した場合、そのプレイヤーは殺されずに済む。</item>
+        <item>夜の間に、プレイヤーを1人指定する。次の日の昼の投票後、投票数が多かった上位の中に指定されたプレイヤーがいなかった場合、指定されたプレイヤーを容疑者に追加する。</item>
+        <item>2人一組の役職であり、お互いがお互いを認識できる。つまり自分以外に1人、人狼でないプレイヤーを知ることができるのである。</item>
+        <item>仲間を持たない単独の勢力。人狼に捕食されることはないが、預言者に指定されると死んでしまう。霊媒師には村人と判断され、終了条件の判断時にも村人として扱われる。</item>
+        <item>2度目の夜に一度だけ生き残っているプレイヤーを1人指定する。そのプレイヤーが人狼か預言者なら、指定したプレイヤーの能力を得る。それ以外の場合は村人になる。</item>
+        <item>仲間を持たない単独の勢力。人狼に捕食されることはない。預言者には村人と判断されるが、霊媒師には人狼と判断される。</item>
+        <item>人狼に捕食されたとき、復讐としてプレイヤーを1人殺害できる。殺す対象を指定するのは狩人で必ずしも人狼を殺せる訳ではない。</item>
+        <item>一般の村人だが、人狼に捕食されたとき、次の日の夜の人狼の襲撃がなくなる。</item>
+        <item>2度目の夜に任意の2人のプレイヤーを指定する。指定された2人は「恋人」となる。恋人達は片方が死んだ場合残りの片方も死ぬ。</item>
+        <item>治癒薬と毒薬を一つずつ持っており、夜の間にそれを使用することが可能。治癒薬は殺害されてすぐのプレイヤーを蘇生できる。毒薬は使った相手を殺害できる。</item>
+        <item>最初は一般の村人だが、預言者が死んだ時預言者になる。</item>
+        <item>夜の間に、プレイヤーを1人指定する。疫病神によって指定されたプレイヤーと一致した場合、次の日の昼の投票の容疑者に追加されない</item>
+        <item>昼の投票で処刑者になった場合一回だけ処刑を回避できる。</item>
+        <item>一般の村人だが、昼の投票が2票分となる。</item>
+        <item>最初は一般の村人だが、人狼の捕食対象になった場合、人狼になる。</item>
+        <item>寿命があり、それは生き残っている人狼×2日。それを過ぎると例え襲撃されていなくても死亡する。</item>
+        <item>夜の間にプレイヤーの中から1人を指定し、そのプレイヤーが仲間を持たない単独の勢力なのかを知ることができる。</item>
+        <item>夜の間にプレイヤーの中から1人を指定し、そのプレイヤーが預言者なのかを知ることができる。人狼が勝利することで勝利となる。</item>
+        <item>2度目の夜、プレイヤーを1人指定する。そのプレイヤーと役職が入れ替わる。指定されたプレイヤーは村人になる。</item>
+        <item>一般の村人だが、人狼に捕食されたとき、一度だけ死なない。</item>
+        <item>夜の間に、プレイヤーを1人指定する。指定されたプレイヤーはカルト信者になる。</item>
+        <item>カルトリーダーによってカルト信者となったプレイヤー。特殊能力を持っていた場合、その能力は失う。</item>
+        <item>2度目の夜に生き残っているプレイヤーの役職に変わる。どのプレイヤーになるかは判らない。</item>
+        <item>仲間を持たない単独の勢力。処刑された時点で勝者となる。</item>
+    </string-array>
+    <string-array name="role_messages">
+        <item>捕食対象のプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>占うプレーヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>護衛するプレイヤーを選んでください</item>
+        <item>呪うプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>その役職になりたいと思うプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>復讐するプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>呪いを解くプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>占うプレーヤーを選んでください</item>
+        <item>占うプレーヤーを選んでください</item>
+        <item>盗みを働くプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>カルト信者にするプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+        <item>人狼だと思うプレイヤーを選んでください</item>
+    </string-array>
+    <string-array name="role_actions">
+        <item>%sさんを殺害しますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんを占いますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんを護衛しますか？</item>
+        <item>%sさんを呪いますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんの役職になりますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんに復讐しますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんの呪いを解きますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんを占いますか？</item>
+        <item>%sさんを占いますか？</item>
+        <item>%sさんの役職を盗みますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんをカルト信者にしますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんに投票しますか？</item>
+        <item>%sさんに投票しますか？</item>
+    </string-array>
+
+    <string name="night_textView_title">第%d夜</string>
+    <string name="night_speech_title">よるがやってきました</string>
+    <string name="night_text_check">%sさんの夜の行動を実行します</string>
+    <string name="roleview_textView_tap_ok">OKをタップしてください</string>
+    <string name="potion_text_title">ポーション</string>
+    <string name="potion_radio_hilling">治療薬</string>
+    <string name="potion_radio_poison">毒薬</string>
+    <string name="group_textView_werewolves">人狼の捕食候補者リスト</string>
+    <string name="group_textView_freemasons">フリーメーソンリスト</string>
+    <string name="group_textView_lovers">恋人たち</string>
+    <string name="group_textView_cultists">カルト教団リスト</string>
+    <string name="moning_textView_title">夜が明け朝になりました</string>
+    <string name="moning_speech_title">よがあけ、あさになりました</string>
+    <string name="moning_textView_died_message">亡くなった方は%sさんです\n</string>
+    <string name="moning_textView_no_died">亡くなった方はいません\n</string>
+    <string name="moning_textView_doubt_message">疑われている方は%sさんです</string>
+    <string name="noon_textView_title">お昼になりました</string>
+    <string name="noon_speech_title">おひるになりました。はなしあいをはじめてください</string>
+    <string name="noon_textView_message">疑わしい人を話し合って探してください。投票は過半数を超える票を集める人がでるまで、再投票します。再投票は上位２名と２位と同票の人です。</string>
+    <string name="noon_button_inclement">＋</string>
+    <string name="noon_button_declement">－</string>
+    <string name="noon_button_start">スタート</string>
+    <string name="noon_speech_end">とうひょうのじかんになりました</string>
+    <string name="vote_textView_title">投票</string>
+    <string name="vote_text_message">%sさんが投票します</string>
+    <string name="vote_text_check">%sさんに投票しますか？</string>
+    <string name="judgement_textView_title">審判</string>
+    <string name="judgement_textView_revote_message">再投票になりました\n候補者は%sさんです</string>
+    <string name="judgement_textView_died_message">処刑された方は%sさんです</string>
+    <string name="judgemen_textView_no_died">処刑された方はいません</string>
+    <string name="judgemen_speech_conclusion">とうひょうけっかがでました</string>
+    <string name="judgemen_speech_revote">さいとうひょうになりました</string>
+    <string name="gameover_textView_werewofves_win">人狼側の勝利です</string>
+    <string name="gameover_textView_villagers_win">村人側の勝利です</string>
+    <string name="gameover_textView_werehamster_win">ハムスター変化の勝利です</string>
+    <string name="gameover_textView_devil_win">悪魔の勝利です</string>
+    <string name="gameover_textView_fool_win">道化師の勝利です</string>
+    <string name="gameover_textView_lovers_win">恋人達の勝利です</string>
+    <string name="gameover_textView_cultists_win">カルト教団の勝利です</string>
+    <string name="gameover_speech_werewofves_win">じんろうがわのしょうりです</string>
+    <string name="gameover_speech_villagers_win">むらびとがわのしょうりです</string>
+    <string name="gameover_speech_werehamster_win">はむすたーへんかのしょうりです</string>
+    <string name="gameover_speech_devil_win">あくまのしょうりです</string>
+    <string name="gameover_speech_fool_win">どうけしのしょうりです</string>
+    <string name="gameover_speech_lovers_win">こいびとたちのしょうりです</string>
+    <string name="gameover_speech_cultists_win">かるときょうだんのしょうりです</string>
+    
+</resources>
