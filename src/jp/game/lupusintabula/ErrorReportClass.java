@@ -26,6 +26,7 @@ import android.util.Log;
 public class ErrorReportClass implements UncaughtExceptionHandler {
 	private static final String TAG = "ErrorReportClass";
 	private static final String Key = "ErrorReport";
+	private static final String MailAddress = "zmf42190@gmail.com";
 	private static Context mContext = null;
 	private static final UncaughtExceptionHandler mDefaultHandler = Thread
 			.getDefaultUncaughtExceptionHandler();
@@ -66,6 +67,7 @@ public class ErrorReportClass implements UncaughtExceptionHandler {
 			editer.commit();
 			Log.e(TAG, report);
 		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
 		}
 		mDefaultHandler.uncaughtException(thread, ex);
 	}
@@ -94,6 +96,7 @@ public class ErrorReportClass implements UncaughtExceptionHandler {
 			editer.commit();
 			Log.e(TAG, report);
 		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
 		}
 	}
 
@@ -101,9 +104,8 @@ public class ErrorReportClass implements UncaughtExceptionHandler {
 		Log.i(TAG, "SendBugReportDialog");
 		try {
 			// バグレポートの内容を読み込みます。
-			mContext = context.getApplicationContext();
 			final SharedPreferences sharedPreferences = PreferenceManager
-					.getDefaultSharedPreferences(mContext);
+					.getDefaultSharedPreferences(context);
 			final String report = sharedPreferences.getString(Key, null);
 			if (report == null) {
 				return;
@@ -111,14 +113,14 @@ public class ErrorReportClass implements UncaughtExceptionHandler {
 			Log.d(TAG, report);
 
 			// AlertDialogを表示します。
-			AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
+			AlertDialog.Builder alert = new AlertDialog.Builder(context);
 			alert.setTitle(R.string.common_text_error);
 			alert.setMessage(R.string.common_text_bug_report);
 			alert.setPositiveButton(R.string.common_text_send,
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							SendBugReport(mContext, report);
+							SendBugReport(context, report);
 							Editor editer = sharedPreferences.edit();
 							editer.putString(Key, null);
 							editer.commit();
@@ -127,6 +129,7 @@ public class ErrorReportClass implements UncaughtExceptionHandler {
 			alert.setNegativeButton(R.string.common_text_cancel, null);
 			alert.show();
 		} catch (Exception e) {
+			Log.e(TAG, e.getMessage());
 		}
 	}
 
@@ -141,7 +144,7 @@ public class ErrorReportClass implements UncaughtExceptionHandler {
 			// メールで送信します。
 			Intent intent = new Intent();
 			intent.setAction(Intent.ACTION_SENDTO);
-			intent.setData(Uri.parse("mailto:" + "zmf42190@gmail.com"));
+			intent.setData(Uri.parse("mailto:" + MailAddress));
 			intent.putExtra(Intent.EXTRA_SUBJECT, "【BugReport】"
 					+ R.string.app_name);
 			intent.putExtra(Intent.EXTRA_TEXT, report);
