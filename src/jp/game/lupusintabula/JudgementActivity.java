@@ -31,47 +31,51 @@ public class JudgementActivity extends Activity {
 			GameData = GameRuleClass.getInstance();
 			TTS = TextToSpeechClass.getInstance(this);
 			TextView textView_player = (TextView) findViewById(R.id.judgement_textView_message);
-			if(GameData.checkJudgement()){
+			if (GameData.checkJudgement()) {
 				TTS.speechText(R.string.judgemen_speech_conclusion);
 			} else {
 				TTS.speechText(R.string.judgemen_speech_revote);
 			}
 			textView_player.setText(getJudgementMassage());
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
 
 	// 審判のメッセージ
 	public String getJudgementMassage() {
-		Resources resource = getResources();
-		String textView_revote_message = resource
-				.getString(R.string.judgement_textView_revote_message);
-		String textView_died_message = resource
-				.getString(R.string.judgement_textView_died_message);
-		String textView_no_died = resource
-				.getString(R.string.judgemen_textView_no_died);
-		String message = "";
-		if (GameData.getVoteablePlayers().size() > 1) {
-			for (String player : GameData.getVoteablePlayers()) {
-				message += player + " ";
-			}
-			message = String.format(textView_revote_message, message);
-		} else if (GameData.getVoteablePlayers().size() == 1) {
-			String LynchedPlayer = GameData.getVoteablePlayers().get(0);
-			message = LynchedPlayer;
-			if (GameData.hasLover(LynchedPlayer)) {
-				message = "";
-				for (String player : GameData.getLovers()) {
+		try {
+			Resources resource = getResources();
+			String textView_revote_message = resource
+					.getString(R.string.judgement_textView_revote_message);
+			String textView_died_message = resource
+					.getString(R.string.judgement_textView_died_message);
+			String textView_no_died = resource
+					.getString(R.string.judgemen_textView_no_died);
+			String message = "";
+			if (GameData.getVoteablePlayers().size() > 1) {
+				for (String player : GameData.getVoteablePlayers()) {
 					message += player + " ";
 				}
+				message = String.format(textView_revote_message, message);
+			} else if (GameData.getVoteablePlayers().size() == 1) {
+				String LynchedPlayer = GameData.getVoteablePlayers().get(0);
+				message = LynchedPlayer;
+				if (GameData.hasLover(LynchedPlayer)) {
+					message = "";
+					for (String player : GameData.getLovers()) {
+						message += player + " ";
+					}
+				}
+				message = String.format(textView_died_message, message);
+			} else {
+				message = textView_no_died;
 			}
-			message = String.format(textView_died_message, message);
-		} else {
-			message = textView_no_died;
+			return message;
+		} catch (Exception e) {
+			ErrorReportClass.LogException(this, e);
 		}
-		return message;
+		return null;
 	}
 
 	public void onClickOkButton(View view) {
@@ -90,7 +94,6 @@ public class JudgementActivity extends Activity {
 				}
 			}
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

@@ -35,43 +35,47 @@ public class MorningActivity extends Activity {
 
 			TTS.speechText(R.string.moning_speech_title);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
 
 	// 朝のメッセージ
 	public String getMoningMassage() {
-		String message = "";
-		Resources resource = getResources();
-		String textView_died_message = resource
-				.getString(R.string.moning_textView_died_message);
-		String textView_no_died = resource
-				.getString(R.string.moning_textView_no_died);
-		if (GameData.getDiedPlayers().size() > 0) {
-			String DiedPlayers = "";
-			for (String player : GameData.getDiedPlayers()) {
-				DiedPlayers += player + " ";
-			}
-			message = String.format(textView_died_message, DiedPlayers);
-		} else {
-			message = textView_no_died;
-		}
-		if (GameData.getDays() > 2) {
-			String doutePlayer = "";
-			String textView_doubt_message = resource
-					.getString(R.string.moning_textView_doubt_message);
-			int max = 0;
-			for (String player : GameData.getAlivePlayers()) {
-				if (GameData.getVote(player) > max) {
-					max = GameData.getVote(player);
-					doutePlayer = player;
+		try {
+			String message = "";
+			Resources resource = getResources();
+			String textView_died_message = resource
+					.getString(R.string.moning_textView_died_message);
+			String textView_no_died = resource
+					.getString(R.string.moning_textView_no_died);
+			if (GameData.getDiedPlayers().size() > 0) {
+				String DiedPlayers = "";
+				for (String player : GameData.getDiedPlayers()) {
+					DiedPlayers += player + " ";
 				}
+				message = String.format(textView_died_message, DiedPlayers);
+			} else {
+				message = textView_no_died;
 			}
-			message += String.format(textView_doubt_message, doutePlayer);
+			if (GameData.getDays() > 2) {
+				String doutePlayer = "";
+				String textView_doubt_message = resource
+						.getString(R.string.moning_textView_doubt_message);
+				int max = 0;
+				for (String player : GameData.getAlivePlayers()) {
+					if (GameData.getVote(player) > max) {
+						max = GameData.getVote(player);
+						doutePlayer = player;
+					}
+				}
+				message += String.format(textView_doubt_message, doutePlayer);
+			}
+			GameData.clearDiedPlayers();
+			return message;
+		} catch (Exception e) {
+			ErrorReportClass.LogException(this, e);
 		}
-		GameData.clearDiedPlayers();
-		return message;
+		return null;
 	}
 
 	public void onClickOkButton(View view) {
@@ -86,7 +90,6 @@ public class MorningActivity extends Activity {
 				startActivity(intent);
 			}
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

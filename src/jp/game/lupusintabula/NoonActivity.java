@@ -42,7 +42,6 @@ public class NoonActivity extends Activity {
 
 			TTS.speechText(R.string.noon_speech_title);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -56,7 +55,6 @@ public class NoonActivity extends Activity {
 			TextView textView_timer = (TextView) findViewById(R.id.noon_textView_timer);
 			textView_timer.setText(timer_text);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -71,7 +69,6 @@ public class NoonActivity extends Activity {
 			TextView textView_timer = (TextView) findViewById(R.id.noon_textView_timer);
 			textView_timer.setText(timer_text);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -109,7 +106,6 @@ public class NoonActivity extends Activity {
 				}
 			}.start();
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -124,7 +120,6 @@ public class NoonActivity extends Activity {
 			Intent intent = new Intent(this, VoteActivity.class);
 			startActivity(intent);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

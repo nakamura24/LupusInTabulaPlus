@@ -58,18 +58,19 @@ public class RoleActivity extends Activity {
 			role_textView_number.setText(String.format(textView_number,
 					number_of_players));
 			Button role_button_max = (Button) findViewById(R.id.role_button_max);
-			role_button_max.setText(String.format(textView_max, Roles.MaxPlayers));
+			role_button_max.setText(String.format(textView_max,
+					Roles.MaxPlayers));
 			RadioButton radio_none = (RadioButton) findViewById(R.id.role_radio_none);
 			radio_none.setChecked(!Roles.Random);
 			RadioButton radio_without_werewolf = (RadioButton) findViewById(R.id.role_radio_without_werewolf);
-			radio_without_werewolf.setChecked(Roles.Random && !Roles.IncludeWerewolf);
+			radio_without_werewolf.setChecked(Roles.Random
+					&& !Roles.IncludeWerewolf);
 			RadioButton radio_include_werewolf = (RadioButton) findViewById(R.id.role_radio_include_werewolf);
 			radio_include_werewolf.setChecked(Roles.IncludeWerewolf);
 
 			// 役職の人数を表示
 			addTableRows();
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -89,28 +90,32 @@ public class RoleActivity extends Activity {
 				TextView TextView_role_number = new TextView(this);
 				TextView_role_number.setId(role.ordinal());
 				Values[role.ordinal()] = Roles.get(role, number_of_players);
-				TextView_role_number.setText(
-						String.valueOf(Values[role.ordinal()]));
+				TextView_role_number.setText(String.valueOf(Values[role
+						.ordinal()]));
 				Button inclement = new Button(this);
 				inclement.setText(" ＋ ");
 				inclement.setId(0x0100 | role.ordinal());
 				inclement.setOnClickListener(new OnClickListener() {
 					public void onClick(View view) {
-						view.getId();
-						TextView TextView_role_number = 
-								(TextView) findViewById(view.getId() & 0x00ff);
-						Values[view.getId() & 0x00ff]++;
-						switch (view.getId() & 0x00ff) {
-						case 7:
-							if (Values[view.getId() & 0x00ff] == 1)
-								Values[view.getId() & 0x00ff]++;
-							break;
-						case 13:
-							Values[view.getId() & 0x00ff] = 1;
-							break;
+						try {
+							view.getId();
+							TextView TextView_role_number = (TextView) findViewById(view
+									.getId() & 0x00ff);
+							Values[view.getId() & 0x00ff]++;
+							switch (view.getId() & 0x00ff) {
+							case 7:
+								if (Values[view.getId() & 0x00ff] == 1)
+									Values[view.getId() & 0x00ff]++;
+								break;
+							case 13:
+								Values[view.getId() & 0x00ff] = 1;
+								break;
+							}
+							TextView_role_number.setText(String
+									.valueOf(Values[view.getId() & 0x00ff]));
+						} catch (Exception e) {
+							ErrorReportClass.LogException(RoleActivity.this, e);
 						}
-						TextView_role_number.setText(
-								String.valueOf(Values[view.getId() & 0x00ff]));
 					}
 				});
 				Button declement = new Button(this);
@@ -119,26 +124,30 @@ public class RoleActivity extends Activity {
 				declement.setHeight(12);
 				declement.setOnClickListener(new OnClickListener() {
 					public void onClick(View view) {
-						view.getId();
-						TextView TextView_role_number = 
-								(TextView) findViewById(view.getId() & 0x00ff);
-						if (Values[view.getId() & 0x00ff] > 0)
-							Values[view.getId() & 0x00ff]--;
-						switch (view.getId() & 0x00ff) {
-						case 0:
-							if (Values[view.getId() & 0x00ff] == 0)
-								Values[view.getId() & 0x00ff] = 1;
-							break;
-						case 7:
-							if (Values[view.getId() & 0x00ff] == 1)
+						try {
+							view.getId();
+							TextView TextView_role_number = (TextView) findViewById(view
+									.getId() & 0x00ff);
+							if (Values[view.getId() & 0x00ff] > 0)
 								Values[view.getId() & 0x00ff]--;
-							break;
-						case 13:
-							Values[view.getId() & 0x00ff] = 0;
-							break;
+							switch (view.getId() & 0x00ff) {
+							case 0:
+								if (Values[view.getId() & 0x00ff] == 0)
+									Values[view.getId() & 0x00ff] = 1;
+								break;
+							case 7:
+								if (Values[view.getId() & 0x00ff] == 1)
+									Values[view.getId() & 0x00ff]--;
+								break;
+							case 13:
+								Values[view.getId() & 0x00ff] = 0;
+								break;
+							}
+							TextView_role_number.setText(String
+									.valueOf(Values[view.getId() & 0x00ff]));
+						} catch (Exception e) {
+							ErrorReportClass.LogException(RoleActivity.this, e);
 						}
-						TextView_role_number.setText(
-								String.valueOf(Values[view.getId() & 0x00ff]));
 					}
 				});
 				table_row.addView(TextView_role_name);
@@ -148,7 +157,6 @@ public class RoleActivity extends Activity {
 				tablelayout_roles.addView(table_row);
 			}
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -157,7 +165,8 @@ public class RoleActivity extends Activity {
 	private void playersAlertDialog(final int number_of_players) {
 		Log.i(Tag, "onClickOkButton");
 		try {
-			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+					this);
 			// アラートダイアログのタイトルを設定します
 			alertDialogBuilder.setTitle(R.string.common_text_warning);
 			// アラートダイアログのメッセージを設定します
@@ -186,11 +195,16 @@ public class RoleActivity extends Activity {
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							if (number_of_players < Roles.MinPlayers) {
-								// 画面の終了
-								Intent intent = new Intent();
-								setResult(RESULT_OK, intent);
-								finish();
+							try {
+								if (number_of_players < Roles.MinPlayers) {
+									// 画面の終了
+									Intent intent = new Intent();
+									setResult(RESULT_OK, intent);
+									finish();
+								}
+							} catch (Exception e) {
+								ErrorReportClass.LogException(
+										RoleActivity.this, e);
 							}
 						}
 					});
@@ -202,7 +216,6 @@ public class RoleActivity extends Activity {
 				alertDialog.show();
 			}
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -211,7 +224,8 @@ public class RoleActivity extends Activity {
 		Log.i(Tag, "onClickMaxButton");
 		try {
 			// 最大人数入力ダイアログ
-			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+					this);
 			// アラートダイアログのタイトルを設定します
 			Resources resource = getResources();
 			final String textView_max = resource
@@ -227,13 +241,18 @@ public class RoleActivity extends Activity {
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							int max = Integer.parseInt(editText.getText()
-									.toString());
-							if (max > Roles.MaxPlayers) {
-								Roles.changeMax(max);
-								Button role_button_max = (Button) findViewById(R.id.role_button_max);
-								role_button_max.setText(String.format(textView_max,
-										Roles.MaxPlayers));
+							try {
+								int max = Integer.parseInt(editText.getText()
+										.toString());
+								if (max > Roles.MaxPlayers) {
+									Roles.changeMax(max);
+									Button role_button_max = (Button) findViewById(R.id.role_button_max);
+									role_button_max.setText(String.format(
+											textView_max, Roles.MaxPlayers));
+								}
+							} catch (Exception e) {
+								ErrorReportClass.LogException(
+										RoleActivity.this, e);
 							}
 						}
 					});
@@ -243,7 +262,6 @@ public class RoleActivity extends Activity {
 			// アラートダイアログを表示します
 			alertDialog.show();
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -279,7 +297,8 @@ public class RoleActivity extends Activity {
 			Editor editer = sharedPreferences.edit();
 			editer.putInt("max_of_player", Roles.MaxPlayers);
 			editer.putBoolean("randam", !radio_none.isChecked());
-			editer.putBoolean("include_werewolf", radio_include_werewolf.isChecked());
+			editer.putBoolean("include_werewolf",
+					radio_include_werewolf.isChecked());
 			editer.commit();
 
 			// 画面の終了
@@ -287,7 +306,6 @@ public class RoleActivity extends Activity {
 			setResult(RESULT_OK, intent);
 			finish();
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
