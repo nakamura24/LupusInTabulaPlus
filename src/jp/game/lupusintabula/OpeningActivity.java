@@ -41,7 +41,6 @@ public class OpeningActivity extends Activity {
 
 			TTS.speechText(R.string.opening_speech_message);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -78,10 +77,15 @@ public class OpeningActivity extends Activity {
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								// 画面の終了
-								Intent intent = new Intent();
-								setResult(RESULT_OK, intent);
-								finish();
+								try {
+									// 画面の終了
+									Intent intent = new Intent();
+									setResult(RESULT_OK, intent);
+									finish();
+								} catch (Exception e) {
+									ErrorReportClass.LogException(
+											OpeningActivity.this, e);
+								}
 							}
 						});
 				AlertDialog alertDialog = alertDialogBuilder.create();
@@ -89,7 +93,6 @@ public class OpeningActivity extends Activity {
 				alertDialog.show();
 			}
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -101,7 +104,6 @@ public class OpeningActivity extends Activity {
 			Intent intent = new Intent(this, NightActivity.class);
 			startActivity(intent);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

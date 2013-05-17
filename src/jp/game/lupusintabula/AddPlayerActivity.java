@@ -25,7 +25,6 @@ public class AddPlayerActivity extends Activity {
 		try {
 			setContentView(R.layout.activity_add_player);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -42,7 +41,6 @@ public class AddPlayerActivity extends Activity {
 			setResult(RESULT_OK, intent);
 			finish();
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

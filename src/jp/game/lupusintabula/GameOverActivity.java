@@ -144,7 +144,6 @@ public class GameOverActivity extends Activity {
 				break;
 			}
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -155,7 +154,6 @@ public class GameOverActivity extends Activity {
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

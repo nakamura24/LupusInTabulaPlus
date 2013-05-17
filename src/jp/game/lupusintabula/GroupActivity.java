@@ -41,7 +41,6 @@ public class GroupActivity extends Activity {
 			}
 			listView_players.setAdapter(adapter);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -54,7 +53,6 @@ public class GroupActivity extends Activity {
 			setResult(RESULT_OK, intent);
 			finish();
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

@@ -57,7 +57,6 @@ public class NightActivity extends Activity {
 
 			TTS.speechText(R.string.night_speech_title);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -80,7 +79,6 @@ public class NightActivity extends Activity {
 				break;
 			}
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -101,17 +99,20 @@ public class NightActivity extends Activity {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
-					if (!players[position])
-						checkPlayerAlertDialog(position);
-					listView_players
-							.setItemChecked(position, players[position]);
+					try {
+						if (!players[position])
+							checkPlayerAlertDialog(position);
+						listView_players.setItemChecked(position,
+								players[position]);
+					} catch (Exception e) {
+						ErrorReportClass.LogException(NightActivity.this, e);
+					}
 				}
 			});
 			for (int i = 0; i < GameData.getAlivePlayers().size(); i++) {
 				listView_players.setItemChecked(i, players[i]);
 			}
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -136,8 +137,8 @@ public class NightActivity extends Activity {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							Log.i(Tag, "onClick");
-							players[position] = true;
 							try {
+								players[position] = true;
 								if (GameData.getDays() > 1) {
 									Intent intent = new Intent(
 											NightActivity.this,
@@ -156,7 +157,8 @@ public class NightActivity extends Activity {
 											ACTIVITY_ROLEVIEW);
 								}
 							} catch (ActivityNotFoundException e) {
-								Log.e(Tag, e.getMessage());
+								ErrorReportClass.LogException(
+										NightActivity.this, e);
 							}
 						}
 					});
@@ -164,15 +166,19 @@ public class NightActivity extends Activity {
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							// リストビュー更新
-							ListView_update();
+							try {
+								// リストビュー更新
+								ListView_update();
+							} catch (ActivityNotFoundException e) {
+								ErrorReportClass.LogException(
+										NightActivity.this, e);
+							}
 						}
 					});
 			AlertDialog alertDialog = alertDialogBuilder.create();
 			// アラートダイアログを表示します
 			alertDialog.show();
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -189,7 +195,6 @@ public class NightActivity extends Activity {
 			Intent intent = new Intent(this, MorningActivity.class);
 			startActivity(intent);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

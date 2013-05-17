@@ -38,7 +38,6 @@ public class VoteActivity extends Activity {
 			players = new boolean[GameData.getAlivePlayers().size()];
 			ListView_update();
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -60,7 +59,6 @@ public class VoteActivity extends Activity {
 				break;
 			}
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -83,17 +81,20 @@ public class VoteActivity extends Activity {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
-					if (!players[position])
-						checkPlayerAlertDialog(position);
-					listView_players
-							.setItemChecked(position, players[position]);
+					try {
+						if (!players[position])
+							checkPlayerAlertDialog(position);
+						listView_players.setItemChecked(position,
+								players[position]);
+					} catch (Exception e) {
+						ErrorReportClass.LogException(VoteActivity.this, e);
+					}
 				}
 			});
 			for (int i = 0; i < GameData.getAlivePlayers().size(); i++) {
 				listView_players.setItemChecked(i, players[i]);
 			}
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -125,19 +126,24 @@ public class VoteActivity extends Activity {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							Log.i(Tag, "onClick");
-							players[position] = true;
-							Intent intent = new Intent(VoteActivity.this,
-									VoteActionActivity.class);
-							intent.putExtra("player", GameData
-									.getAlivePlayers().get(position));
-							startActivityForResult(intent, ACTIVITY_VOTEACTION);
+							try {
+								players[position] = true;
+								Intent intent = new Intent(VoteActivity.this,
+										VoteActionActivity.class);
+								intent.putExtra("player", GameData
+										.getAlivePlayers().get(position));
+								startActivityForResult(intent,
+										ACTIVITY_VOTEACTION);
+							} catch (Exception e) {
+								ErrorReportClass.LogException(
+										VoteActivity.this, e);
+							}
 						}
 					});
 			AlertDialog alertDialog = alertDialogBuilder.create();
 			// アラートダイアログを表示します
 			alertDialog.show();
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

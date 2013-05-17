@@ -32,7 +32,6 @@ public class MainActivity extends Activity {
 	        //呼び出されるデフォルトのハンドラを設定します。  
 	        Thread.setDefaultUncaughtExceptionHandler(new ErrorReportClass(this));  
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -56,7 +55,6 @@ public class MainActivity extends Activity {
 				break;
 			}
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -67,7 +65,6 @@ public class MainActivity extends Activity {
 			Intent intent = new Intent(this, OpeningActivity.class);
 			startActivity(intent);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -78,7 +75,6 @@ public class MainActivity extends Activity {
 			Intent intent = new Intent(this, PlayerActivity.class);
 			startActivityForResult(intent, ACTIVITY_PLAYER);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -89,7 +85,6 @@ public class MainActivity extends Activity {
 			Intent intent = new Intent(this, RoleActivity.class);
 			startActivityForResult(intent, ACTIVITY_ROLE);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -100,7 +95,6 @@ public class MainActivity extends Activity {
 			Intent intent = new Intent(this, HelpActivity.class);
 			startActivityForResult(intent, ACTIVITY_HELP);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
