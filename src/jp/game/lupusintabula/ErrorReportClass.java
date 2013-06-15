@@ -23,10 +23,10 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import static jp.game.lupusintabula.Constant.*;
+
 public class ErrorReportClass implements UncaughtExceptionHandler {
 	private static final String TAG = "ErrorReportClass";
-	private static final String Key = "ErrorReport";
-	private static final String MailAddress = "zmf42190@gmail.com";
 	private static Context mContext = null;
 	private static final UncaughtExceptionHandler mDefaultHandler = Thread
 			.getDefaultUncaughtExceptionHandler();
@@ -63,7 +63,7 @@ public class ErrorReportClass implements UncaughtExceptionHandler {
 			SharedPreferences sharedPreferences = PreferenceManager
 					.getDefaultSharedPreferences(mContext);
 			Editor editer = sharedPreferences.edit();
-			editer.putString(Key, report);
+			editer.putString(ErrorReportKey, report);
 			editer.commit();
 			Log.e(TAG, report);
 		} catch (Exception e) {
@@ -92,7 +92,7 @@ public class ErrorReportClass implements UncaughtExceptionHandler {
 			SharedPreferences sharedPreferences = PreferenceManager
 					.getDefaultSharedPreferences(context);
 			Editor editer = sharedPreferences.edit();
-			editer.putString(Key, report);
+			editer.putString(ErrorReportKey, report);
 			editer.commit();
 			Log.e(TAG, report);
 		} catch (Exception e) {
@@ -106,7 +106,7 @@ public class ErrorReportClass implements UncaughtExceptionHandler {
 			// バグレポートの内容を読み込みます。
 			final SharedPreferences sharedPreferences = PreferenceManager
 					.getDefaultSharedPreferences(context);
-			final String report = sharedPreferences.getString(Key, null);
+			final String report = sharedPreferences.getString(ErrorReportKey, null);
 			if (report == null) {
 				return;
 			}
@@ -120,14 +120,10 @@ public class ErrorReportClass implements UncaughtExceptionHandler {
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							try {
-								SendBugReport(context, report);
-								Editor editer = sharedPreferences.edit();
-								editer.putString(Key, null);
-								editer.commit();
-							} catch (Exception e) {
-								Log.e(TAG, e.getMessage());
-							}
+							SendBugReport(context, report);
+							Editor editer = sharedPreferences.edit();
+							editer.putString(ErrorReportKey, null);
+							editer.commit();
 						}
 					});
 			alert.setNegativeButton(R.string.common_text_cancel, null);
@@ -154,7 +150,6 @@ public class ErrorReportClass implements UncaughtExceptionHandler {
 			intent.putExtra(Intent.EXTRA_TEXT, report);
 			context.startActivity(intent);
 		} catch (Exception e) {
-			Log.e(TAG, e.getMessage());
 		}
 	}
 }

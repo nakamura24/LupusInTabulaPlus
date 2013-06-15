@@ -25,11 +25,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import static jp.game.lupusintabula.Constant.*;
+
 public class RoleActionActivity extends Activity {
 	private static final String Tag = "RoleActionActivity";
 	private static final int ACTIVITY_ROLEVIEW = 0x0201;
-	private static final int ACTIVITY_GROUP = 0x0203;
-	private static final int ACTIVITY_POTION = 0x0204;
 	private GameRuleClass GameData;
 	private String Player;
 
@@ -72,13 +72,8 @@ public class RoleActionActivity extends Activity {
 							@Override
 							public void onItemClick(AdapterView<?> parent,
 									View view, int position, long id) {
-								try {
-									checkPlayerAlertDialog((String) parent
-											.getItemAtPosition(position));
-								} catch (Exception e) {
-									ErrorReportClass.LogException(
-											RoleActionActivity.this, e);
-								}
+								checkPlayerAlertDialog((String) parent
+										.getItemAtPosition(position));
 							}
 						});
 				Button button_ok = (Button) findViewById(R.id.button_ok);
@@ -95,6 +90,7 @@ public class RoleActionActivity extends Activity {
 				listView_players.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 			}
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -128,10 +124,11 @@ public class RoleActionActivity extends Activity {
 				break;
 			}
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
-
+	
 	// 役職別の表示処理
 	public void onClickConfirmButton(View view) {
 		Log.d(Tag, "roleActionView");
@@ -270,6 +267,7 @@ public class RoleActionActivity extends Activity {
 				startActivityForResult(intent, ACTIVITY_GROUP);
 			}
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -375,6 +373,7 @@ public class RoleActionActivity extends Activity {
 				break;
 			}
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -400,17 +399,12 @@ public class RoleActionActivity extends Activity {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							Log.i(Tag, "onClick");
-							try {
-								// 役職別の処理
-								roleAction(player);
-								// 画面の終了
-								Intent intent = new Intent();
-								setResult(RESULT_OK, intent);
-								finish();
-							} catch (Exception e) {
-								ErrorReportClass.LogException(
-										RoleActionActivity.this, e);
-							}
+							// 役職別の処理
+							roleAction(player);
+							// 画面の終了
+							Intent intent = new Intent();
+							setResult(RESULT_OK, intent);
+							finish();
 						}
 					});
 			alertDialogBuilder.setNegativeButton(R.string.common_text_cancel,
@@ -423,6 +417,7 @@ public class RoleActionActivity extends Activity {
 			// アラートダイアログを表示します
 			alertDialog.show();
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -452,6 +447,7 @@ public class RoleActionActivity extends Activity {
 			setResult(RESULT_OK, intent);
 			finish();
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
