@@ -54,11 +54,15 @@ public class VoteActionActivity extends Activity {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
-					checkPlayerAlertDialog(position);
+					try {
+						checkPlayerAlertDialog(position);
+					} catch (Exception e) {
+						ErrorReportClass.LogException(VoteActionActivity.this,
+								e);
+					}
 				}
 			});
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -83,26 +87,36 @@ public class VoteActionActivity extends Activity {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							Log.i(Tag, "onClick");
-							GameData.votePlayer(Player, GameData
-									.getVoteablePlayers().get(position));
-							Intent intent = new Intent();
-							setResult(RESULT_OK, intent);
-							finish();
+							try {
+								GameData.votePlayer(Player, GameData
+										.getVoteablePlayers().get(position));
+								Intent intent = new Intent();
+								setResult(RESULT_OK, intent);
+								finish();
+							} catch (Exception e) {
+								ErrorReportClass.LogException(
+										VoteActionActivity.this, e);
+							}
 						}
 					});
 			alertDialogBuilder.setNegativeButton(R.string.common_text_cancel,
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							ListView listView_players = (ListView) findViewById(R.id.vote_listView_players);
-							listView_players.setItemChecked(position, false);
+							try {
+								ListView listView_players = (ListView) findViewById(R.id.vote_listView_players);
+								listView_players
+										.setItemChecked(position, false);
+							} catch (Exception e) {
+								ErrorReportClass.LogException(
+										VoteActionActivity.this, e);
+							}
 						}
 					});
 			AlertDialog alertDialog = alertDialogBuilder.create();
 			// アラートダイアログを表示します
 			alertDialog.show();
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

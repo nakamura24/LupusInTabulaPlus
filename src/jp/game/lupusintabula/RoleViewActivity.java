@@ -73,49 +73,58 @@ public class RoleViewActivity extends Activity {
 			if (message)
 				textView_message.setText(getGroupMassage(Player));
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
 
 	// 画像ＩＤを取得
 	public int getImageId(int role, boolean gender) {
-		if (gender) {
-			return drawables_male[role];
-		} else {
-			return drawables_female[role];
+		try {
+			if (gender) {
+				return drawables_male[role];
+			} else {
+				return drawables_female[role];
+			}
+		} catch (Exception e) {
+			ErrorReportClass.LogException(this, e);
 		}
+		return -1;
 	}
 
 	// 仲間を表示するためのメッセージ
 	public String getGroupMassage(String player) {
-		String message = "";
-		switch (GameData.getRole(player)) {
-		case Werewolf:
-			for (String werewolf : GameData.getWerewolves()) {
-				message += werewolf + " ";
+		try {
+			String message = "";
+			switch (GameData.getRole(player)) {
+			case Werewolf:
+				for (String werewolf : GameData.getWerewolves()) {
+					message += werewolf + " ";
+				}
+				break;
+			case Freemason:
+				for (String mason : GameData.getMasons()) {
+					message += mason + " ";
+				}
+				break;
+			case CultLeader:
+			case Cultist:
+				for (String cultist : GameData.getCultists()) {
+					message += cultist + " ";
+				}
+				break;
+			default:
+				break;
 			}
-			break;
-		case Freemason:
-			for (String mason : GameData.getMasons()) {
-				message += mason + " ";
+			for (String lover : GameData.getLovers()) {
+				if (lover.equals(player)) {
+					message += lover + " ";
+				}
 			}
-			break;
-		case CultLeader:
-		case Cultist:
-			for (String cultist : GameData.getCultists()) {
-				message += cultist + " ";
-			}
-			break;
-		default:
-			break;
+			return message.trim();
+		} catch (Exception e) {
+			ErrorReportClass.LogException(this, e);
 		}
-		for (String lover : GameData.getLovers()) {
-			if (lover.equals(player)) {
-				message += lover + " ";
-			}
-		}
-		return message.trim();
+		return null;
 	}
 
 	public void onClickRoleImage(View view) {
@@ -126,7 +135,6 @@ public class RoleViewActivity extends Activity {
 			setResult(RESULT_OK, intent);
 			finish();
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

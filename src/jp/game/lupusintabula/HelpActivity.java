@@ -36,7 +36,6 @@ public class HelpActivity extends Activity {
 			packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
 			help_textView_version.setText(String.format(textView_version, packageInfo.versionName));
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -49,7 +48,6 @@ public class HelpActivity extends Activity {
 			setResult(RESULT_OK, intent);
 			finish();
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

@@ -25,11 +25,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import static jp.game.lupusintabula.Constant.*;
+
 public class RoleActionActivity extends Activity {
 	private static final String Tag = "RoleActionActivity";
 	private static final int ACTIVITY_ROLEVIEW = 0x0201;
-	private static final int ACTIVITY_GROUP = 0x0203;
-	private static final int ACTIVITY_POTION = 0x0204;
 	private GameRuleClass GameData;
 	private String Player;
 

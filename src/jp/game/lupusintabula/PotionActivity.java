@@ -36,7 +36,6 @@ public class PotionActivity extends Activity {
 			if (!GameData.hasPoison(player))
 				radio_poison.setVisibility(View.GONE);
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -53,7 +52,6 @@ public class PotionActivity extends Activity {
 			setResult(RESULT_OK, intent);
 			finish();
 		} catch (Exception e) {
-			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

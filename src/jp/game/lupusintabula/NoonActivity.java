@@ -19,11 +19,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import static jp.game.lupusintabula.Constant.*;
+
 public class NoonActivity extends Activity {
 	private static final String Tag = "NoonActivity";
 	private GameRuleClass GameData;
 	private TextToSpeechClass TTS;
-	private int time = 3;
+	private int time = Debate_Time;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

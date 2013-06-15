@@ -14,11 +14,10 @@ import android.view.View;
 import android.app.Activity;
 import android.content.Intent;
 
+import static jp.game.lupusintabula.Constant.*;
+
 public class MainActivity extends Activity {
 	private static final String Tag = "MainActivity";
-	private static final int ACTIVITY_PLAYER = 0x0001;
-	private static final int ACTIVITY_ROLE = 0x0002;
-	private static final int ACTIVITY_HELP = 0x0003;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

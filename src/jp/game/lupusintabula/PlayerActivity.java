@@ -22,9 +22,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ToggleButton;
 
+import static jp.game.lupusintabula.Constant.*;
+
 public class PlayerActivity extends Activity {
 	private static final String Tag = "PlayerActivity";
-	public static final int ACTIVITY_ADDPLAYER = 0x0101;
 	private GameRuleClass GameData;
 
 	@Override

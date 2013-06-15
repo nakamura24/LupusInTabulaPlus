@@ -24,10 +24,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import static jp.game.lupusintabula.Constant.*;
+
 public class NightActivity extends Activity {
 	private static final String Tag = "NightActivity";
-	public static final int ACTIVITY_ROLEVIEW = 0x0201;
-	private static final int ACTIVITY_ROLEACTION = 0x0202;
 	private GameRuleClass GameData;
 	private TextToSpeechClass TTS;
 	private boolean[] players;

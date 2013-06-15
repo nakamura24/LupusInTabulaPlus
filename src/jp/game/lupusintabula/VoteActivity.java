@@ -21,9 +21,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import static jp.game.lupusintabula.Constant.*;
+
 public class VoteActivity extends Activity {
 	private static final String Tag = "VoteActivity";
-	private static final int ACTIVITY_VOTEACTION = 0x0501;
 	private GameRuleClass GameData;
 	private static boolean[] players;
 

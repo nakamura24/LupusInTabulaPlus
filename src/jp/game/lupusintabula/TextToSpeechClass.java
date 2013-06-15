@@ -8,8 +8,8 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
 public class TextToSpeechClass implements TextToSpeech.OnInitListener {
-	private static TextToSpeechClass instance = new TextToSpeechClass();
 	private static final String Tag = "TextToSpeechClass";
+	private static TextToSpeechClass instance = new TextToSpeechClass();
 	private static TextToSpeech    mTextToSpeech = null;
 	private static int mStatus = TextToSpeech.ERROR;
 	private static Context mContext;
