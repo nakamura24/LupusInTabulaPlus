@@ -19,11 +19,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import static jp.game.lupusintabula.Constant.*;
+
 public class NoonActivity extends Activity {
 	private static final String Tag = "NoonActivity";
 	private GameRuleClass GameData;
 	private TextToSpeechClass TTS;
-	private int time = 3;
+	private int time = Debate_Time;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class NoonActivity extends Activity {
 
 			TTS.speechText(R.string.noon_speech_title);
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -55,6 +58,7 @@ public class NoonActivity extends Activity {
 			TextView textView_timer = (TextView) findViewById(R.id.noon_textView_timer);
 			textView_timer.setText(timer_text);
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -69,6 +73,7 @@ public class NoonActivity extends Activity {
 			TextView textView_timer = (TextView) findViewById(R.id.noon_textView_timer);
 			textView_timer.setText(timer_text);
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -106,6 +111,7 @@ public class NoonActivity extends Activity {
 				}
 			}.start();
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -120,6 +126,7 @@ public class NoonActivity extends Activity {
 			Intent intent = new Intent(this, VoteActivity.class);
 			startActivity(intent);
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

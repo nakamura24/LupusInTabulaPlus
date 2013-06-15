@@ -14,11 +14,10 @@ import android.view.View;
 import android.app.Activity;
 import android.content.Intent;
 
+import static jp.game.lupusintabula.Constant.*;
+
 public class MainActivity extends Activity {
 	private static final String Tag = "MainActivity";
-	private static final int ACTIVITY_PLAYER = 0x0001;
-	private static final int ACTIVITY_ROLE = 0x0002;
-	private static final int ACTIVITY_HELP = 0x0003;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +31,7 @@ public class MainActivity extends Activity {
 	        //呼び出されるデフォルトのハンドラを設定します。  
 	        Thread.setDefaultUncaughtExceptionHandler(new ErrorReportClass(this));  
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -55,6 +55,7 @@ public class MainActivity extends Activity {
 				break;
 			}
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -65,6 +66,7 @@ public class MainActivity extends Activity {
 			Intent intent = new Intent(this, OpeningActivity.class);
 			startActivity(intent);
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -75,6 +77,7 @@ public class MainActivity extends Activity {
 			Intent intent = new Intent(this, PlayerActivity.class);
 			startActivityForResult(intent, ACTIVITY_PLAYER);
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -85,6 +88,7 @@ public class MainActivity extends Activity {
 			Intent intent = new Intent(this, RoleActivity.class);
 			startActivityForResult(intent, ACTIVITY_ROLE);
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -95,6 +99,7 @@ public class MainActivity extends Activity {
 			Intent intent = new Intent(this, HelpActivity.class);
 			startActivityForResult(intent, ACTIVITY_HELP);
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

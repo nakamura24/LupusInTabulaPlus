@@ -21,9 +21,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import static jp.game.lupusintabula.Constant.*;
+
 public class VoteActivity extends Activity {
 	private static final String Tag = "VoteActivity";
-	private static final int ACTIVITY_VOTEACTION = 0x0501;
 	private GameRuleClass GameData;
 	private static boolean[] players;
 
@@ -38,6 +39,7 @@ public class VoteActivity extends Activity {
 			players = new boolean[GameData.getAlivePlayers().size()];
 			ListView_update();
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -59,6 +61,7 @@ public class VoteActivity extends Activity {
 				break;
 			}
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -81,20 +84,17 @@ public class VoteActivity extends Activity {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
-					try {
-						if (!players[position])
-							checkPlayerAlertDialog(position);
-						listView_players.setItemChecked(position,
-								players[position]);
-					} catch (Exception e) {
-						ErrorReportClass.LogException(VoteActivity.this, e);
-					}
+					if (!players[position])
+						checkPlayerAlertDialog(position);
+					listView_players
+							.setItemChecked(position, players[position]);
 				}
 			});
 			for (int i = 0; i < GameData.getAlivePlayers().size(); i++) {
 				listView_players.setItemChecked(i, players[i]);
 			}
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -126,24 +126,19 @@ public class VoteActivity extends Activity {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							Log.i(Tag, "onClick");
-							try {
-								players[position] = true;
-								Intent intent = new Intent(VoteActivity.this,
-										VoteActionActivity.class);
-								intent.putExtra("player", GameData
-										.getAlivePlayers().get(position));
-								startActivityForResult(intent,
-										ACTIVITY_VOTEACTION);
-							} catch (Exception e) {
-								ErrorReportClass.LogException(
-										VoteActivity.this, e);
-							}
+							players[position] = true;
+							Intent intent = new Intent(VoteActivity.this,
+									VoteActionActivity.class);
+							intent.putExtra("player", GameData
+									.getAlivePlayers().get(position));
+							startActivityForResult(intent, ACTIVITY_VOTEACTION);
 						}
 					});
 			AlertDialog alertDialog = alertDialogBuilder.create();
 			// アラートダイアログを表示します
 			alertDialog.show();
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}

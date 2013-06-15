@@ -22,9 +22,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ToggleButton;
 
+import static jp.game.lupusintabula.Constant.*;
+
 public class PlayerActivity extends Activity {
 	private static final String Tag = "PlayerActivity";
-	public static final int ACTIVITY_ADDPLAYER = 0x0101;
 	private GameRuleClass GameData;
 
 	@Override
@@ -44,6 +45,7 @@ public class PlayerActivity extends Activity {
 			// リストビュー更新
 			ListView_update();
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -63,6 +65,7 @@ public class PlayerActivity extends Activity {
 				break;
 			}
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -73,6 +76,7 @@ public class PlayerActivity extends Activity {
 			Intent intent = new Intent(this, AddPlayerActivity.class);
 			startActivityForResult(intent, ACTIVITY_ADDPLAYER);
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -92,6 +96,7 @@ public class PlayerActivity extends Activity {
 				}
 			}
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -108,6 +113,7 @@ public class PlayerActivity extends Activity {
 			// リストビュー更新
 			ListView_update();
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -126,6 +132,7 @@ public class PlayerActivity extends Activity {
 			ToggleButton toggleButton_all = (ToggleButton) findViewById(R.id.player_toggleButton_all);
 			onClickAllButton(toggleButton_all);
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
@@ -165,6 +172,7 @@ public class PlayerActivity extends Activity {
 			setResult(RESULT_OK, intent);
 			finish();
 		} catch (Exception e) {
+			Log.e(Tag, e.getMessage());
 			ErrorReportClass.LogException(this, e);
 		}
 	}
